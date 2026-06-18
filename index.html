@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>てんかん 理解ガイド｜就労移行支援スタッフのために</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────── */
+:root {
+  --navy:   #1e3a5f;
+  --navy2:  #15294a;
+  --teal:   #009e94;
+  --teal-l: #e0f7f5;
+  --teal-d: #007a71;
+  --amber:  #e8a020;
+  --amber-l:#fff4dc;
+  --terra:  #d94f30;
+  --terra-l:#fdecea;
+  --cream:  #f8f5f1;
+  --white:  #ffffff;
+  --gray1:  #6b7280;
+  --gray2:  #d1d5db;
+  --text:   #1a2535;
+  --r: 12px;
+  --r-s: 8px;
+}
+
+/* ─── RESET & BASE ───────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+h1,h2,h3,h4 { font-family: 'Noto Serif JP', serif; line-height: 1.4; }
+
+/* ─── PROGRESS BAR ───────────────────────── */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--teal), var(--amber));
+  z-index: 1000;
+  transition: width 0.1s linear;
+}
+
+/* ─── STICKY NAV ─────────────────────────── */
+#sticky-nav {
+  position: fixed; top: 3px; left: 0; right: 0;
+  background: rgba(30,58,95,0.96);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 24px;
+  gap: 12px;
+}
+.nav-brand {
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex; gap: 4px; flex-wrap: wrap;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  background: rgba(255,255,255,0.15);
+  color: var(--white);
+}
+
+/* ─── REVEAL ─────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ─── LAYOUT ─────────────────────────────── */
+.section-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+section {
+  padding: 72px 0;
+}
+section:first-of-type { padding-top: 0; }
+
+/* ─── SECTION LABEL ──────────────────────── */
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--teal-l);
+  color: var(--teal-d);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: clamp(22px, 4vw, 30px);
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.section-lead {
+  font-size: 16px;
+  color: var(--gray1);
+  margin-bottom: 36px;
+  max-width: 660px;
+}
+.divider {
+  width: 48px; height: 3px;
+  background: var(--teal);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+/* ─── HERO ───────────────────────────────── */
+#hero {
+  background: var(--navy);
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 100px 24px 72px;
+}
+#neuron-canvas {
+  position: absolute; inset: 0;
+  opacity: 0.18;
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 860px; margin: 0 auto;
+  position: relative; z-index: 2;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.9);
+  font-size: 12px; letter-spacing: 0.1em;
+  padding: 6px 14px; border-radius: 20px;
+  margin-bottom: 28px;
+}
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+.hero-title span { color: var(--teal); }
+.hero-lead {
+  font-size: 17px;
+  color: rgba(255,255,255,0.75);
+  max-width: 600px;
+  margin-bottom: 52px;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+}
+.stat-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--r);
+  padding: 24px 20px;
+}
+.stat-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 36px; font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+}
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.4); font-size: 11px;
+}
+.scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 2px solid rgba(255,255,255,0.3);
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(5px); }
+}
+
+/* ─── MISCONCEPTION CARD ─────────────────── */
+.misconception-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+@media(max-width:600px){ .misconception-pair { grid-template-columns: 1fr; } }
+.mc-card {
+  border-radius: var(--r);
+  padding: 20px;
+  position: relative;
+}
+.mc-card.wrong {
+  background: var(--terra-l);
+  border: 1.5px solid #f5b9ae;
+}
+.mc-card.right {
+  background: var(--teal-l);
+  border: 1.5px solid #a3ddd9;
+}
+.mc-label {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+.mc-card.wrong .mc-label { color: var(--terra); }
+.mc-card.right .mc-label { color: var(--teal-d); }
+.mc-text {
+  font-size: 15px; font-weight: 500;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* ─── DEFINITION CARD ────────────────────── */
+.definition-box {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--r);
+  padding: 32px;
+  margin-bottom: 32px;
+}
+.def-word {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 22px;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+.def-text {
+  font-size: 16px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.8;
+}
+
+/* ─── PREVALENCE BAR ─────────────────────── */
+.prevalence-row {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+}
+.prev-label { font-size: 13px; color: var(--gray1); width: 100px; flex-shrink: 0; }
+.prev-track {
+  flex: 1; height: 12px; background: var(--gray2); border-radius: 20px; overflow: hidden;
+}
+.prev-fill {
+  height: 100%; border-radius: 20px; width: 0;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+  background: linear-gradient(90deg, var(--teal), var(--teal-d));
+}
+.prev-val { font-size: 13px; font-weight: 700; color: var(--navy); width: 52px; text-align: right; }
+
+/* ─── NEURON SECTION ─────────────────────── */
+#mechanism { background: var(--white); }
+.brain-diagram {
+  background: var(--navy);
+  border-radius: var(--r);
+  padding: 32px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.brain-svg-wrap {
+  display: flex; justify-content: center;
+  margin-bottom: 24px;
+}
+
+.phase-tabs {
+  display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.phase-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none; cursor: pointer;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; font-weight: 500;
+  transition: all 0.2s;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6);
+}
+.phase-tab.active {
+  background: var(--teal);
+  color: var(--white);
+}
+.phase-content { display: none; }
+.phase-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.phase-text {
+  color: rgba(255,255,255,0.8);
+  font-size: 15px; line-height: 1.8;
+}
+.phase-highlight {
+  display: inline-block;
+  background: rgba(0,158,148,0.25);
+  border-left: 3px solid var(--teal);
+  padding: 2px 10px;
+  margin: 8px 0;
+  border-radius: 0 4px 4px 0;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.mechanism-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.mstep {
+  background: var(--cream);
+  border-radius: var(--r);
+  padding: 20px;
+  border-left: 4px solid var(--teal);
+}
+.mstep-num {
+  font-size: 28px; font-weight: 900;
+  color: var(--teal);
+  opacity: 0.4;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.mstep-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.mstep-text { font-size: 13px; color: var(--gray1); line-height: 1.6; }
+
+/* ─── SEIZURE TYPES ──────────────────────── */
+#seizure-types { background: var(--cream); }
+.type-tree {
+  margin-bottom: 32px;
+}
+.tree-root {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--r);
+  padding: 18px 24px;
+  text-align: center;
+  font-size: 16px; font-weight: 700;
+  margin-bottom: 24px;
+  position: relative;
+}
+.tree-root::after {
+  content: '';
+  position: absolute; bottom: -24px; left: 50%;
+  width: 2px; height: 24px;
+  background: var(--gray2);
+  transform: translateX(-50%);
+}
+.tree-branches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media(max-width:600px){ .tree-branches { grid-template-columns: 1fr; } }
+.tree-branch {
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1.5px solid var(--gray2);
+}
+.branch-header {
+  padding: 14px 18px;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all 0.2s;
+}
+.branch-header.focal { background: #e8f0fe; color: #3730a3; }
+.branch-header.general { background: #fff4e5; color: #92400e; }
+.branch-header .chevron {
+  transition: transform 0.3s;
+  font-size: 12px;
+}
+.branch-header.open .chevron { transform: rotate(180deg); }
+.branch-body {
+  background: var(--white);
+  padding: 0;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+}
+.branch-body.open {
+  padding: 16px 18px;
+  max-height: 800px;
+}
+.seizure-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray2);
+}
+.seizure-item:last-child { border-bottom: none; }
+.si-name {
+  font-size: 14px; font-weight: 700;
+  color: var(--navy); margin-bottom: 4px;
+}
+.si-desc {
+  font-size: 13px; color: var(--gray1); line-height: 1.6;
+  margin-bottom: 6px;
+}
+.si-look {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--teal-l);
+  color: var(--teal-d);
+  font-size: 11px; padding: 3px 9px;
+  border-radius: 12px; font-weight: 500;
+}
+
+.important-note {
+  background: var(--amber-l);
+  border: 1.5px solid #f0a520;
+  border-radius: var(--r);
+  padding: 20px 24px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.note-icon { flex-shrink: 0; margin-top: 2px; }
+.note-text { font-size: 14px; color: var(--text); line-height: 1.7; }
+.note-text strong { color: var(--navy); }
+
+/* ─── TRIGGERS ───────────────────────────── */
+#triggers { background: var(--white); }
+.trigger-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.trigger-card {
+  background: var(--cream);
+  border-radius: var(--r);
+  padding: 18px 14px;
+  text-align: center;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.trigger-card:hover {
+  border-color: var(--amber);
+  background: var(--amber-l);
+  transform: translateY(-3px);
+}
+.tc-icon { margin-bottom: 10px; }
+.tc-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.tc-sub { font-size: 11px; color: var(--gray1); line-height: 1.5; }
+
+.trigger-tip {
+  background: var(--navy);
+  color: rgba(255,255,255,0.85);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  font-size: 14px; line-height: 1.7;
+}
+.trigger-tip strong { color: var(--teal); }
+
+/* ─── TREATMENT ──────────────────────────── */
+#treatment { background: var(--cream); }
+.treatment-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: var(--r);
+  padding: 36px 32px;
+  margin-bottom: 28px;
+  display: flex; gap: 32px; align-items: center; flex-wrap: wrap;
+}
+.pie-wrap {
+  flex-shrink: 0;
+  width: 120px; height: 120px;
+  position: relative;
+}
+.pie-wrap svg { transform: rotate(-90deg); }
+.pie-label {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+.pie-pct { font-size: 26px; font-weight: 900; color: var(--teal); line-height: 1; }
+.pie-sub { font-size: 10px; color: rgba(255,255,255,0.6); }
+.treatment-text-block { flex: 1; min-width: 200px; }
+.treatment-headline {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 20px; color: var(--white);
+  margin-bottom: 10px;
+}
+.treatment-desc {
+  font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.75;
+}
+.treatment-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+.tx-card {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: 20px;
+  border-top: 4px solid transparent;
+}
+.tx-card.drug { border-top-color: var(--teal); }
+.tx-card.surgery { border-top-color: var(--amber); }
+.tx-card.other { border-top-color: var(--terra); }
+.tx-icon { margin-bottom: 10px; }
+.tx-name { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.tx-desc { font-size: 13px; color: var(--gray1); line-height: 1.6; }
+
+/* ─── EMERGENCY ──────────────────────────── */
+#emergency { background: #fefcfb; }
+.emergency-header {
+  background: var(--terra);
+  color: var(--white);
+  border-radius: var(--r) var(--r) 0 0;
+  padding: 20px 28px;
+  display: flex; align-items: center; gap: 12px;
+}
+.emergency-header h3 { font-family: 'Noto Serif JP', serif; font-size: 18px; }
+.flow-wrap {
+  background: var(--white);
+  border: 1.5px solid var(--gray2);
+  border-top: none;
+  border-radius: 0 0 var(--r) var(--r);
+  padding: 24px;
+  margin-bottom: 28px;
+}
+.flow-step {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray2);
+  position: relative;
+}
+.flow-step:last-child { border-bottom: none; }
+.flow-num {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--terra);
+  color: var(--white);
+  font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.flow-body { flex: 1; }
+.flow-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.flow-text { font-size: 13px; color: var(--gray1); line-height: 1.65; }
+.flow-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 9px; border-radius: 12px; margin-top: 6px;
+}
+.flow-tag.do { background: #dcfce7; color: #15803d; }
+.flow-tag.dont { background: var(--terra-l); color: var(--terra); }
+
+.dont-list {
+  background: var(--terra-l);
+  border: 1.5px solid #f5b9ae;
+  border-radius: var(--r);
+  padding: 24px;
+  margin-bottom: 28px;
+}
+.dont-list h4 {
+  font-size: 15px; font-weight: 700;
+  color: var(--terra);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.dont-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5b9ae;
+  font-size: 14px; color: var(--text); line-height: 1.6;
+}
+.dont-item:last-child { border-bottom: none; }
+.dont-x { color: var(--terra); font-weight: 900; font-size: 16px; flex-shrink: 0; }
+
+.call119-box {
+  background: var(--navy);
+  border-radius: var(--r);
+  padding: 24px 28px;
+  display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;
+}
+.call119-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 48px; font-weight: 700;
+  color: var(--terra);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.call119-body { flex: 1; min-width: 180px; }
+.call119-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.call119-item {
+  font-size: 13px; color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  display: flex; gap: 8px;
+}
+.call119-bullet { color: var(--terra); font-weight: 700; flex-shrink: 0; }
+
+/* ─── EMPLOYMENT ─────────────────────────── */
+#employment { background: var(--white); }
+.emp-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+@media(max-width:600px){ .emp-split { grid-template-columns: 1fr; } }
+.emp-col { border-radius: var(--r); padding: 24px; }
+.emp-col.challenges { background: var(--terra-l); border: 1.5px solid #f5b9ae; }
+.emp-col.strengths { background: var(--teal-l); border: 1.5px solid #a3ddd9; }
+.emp-col-title {
+  font-size: 14px; font-weight: 700; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.emp-col.challenges .emp-col-title { color: var(--terra); }
+.emp-col.strengths .emp-col-title { color: var(--teal-d); }
+.emp-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 13px; color: var(--text); line-height: 1.65;
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.1);
+}
+.emp-item:last-child { border-bottom: none; }
+
+.law-card {
+  background: var(--cream);
+  border-radius: var(--r);
+  padding: 24px;
+  margin-bottom: 32px;
+  border-left: 4px solid var(--navy);
+}
+.law-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+.law-item {
+  display: flex; gap: 10px;
+  font-size: 14px; color: var(--text); line-height: 1.7;
+  padding: 6px 0;
+}
+.law-badge {
+  display: inline-flex;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 10px; font-weight: 700;
+  padding: 2px 8px; border-radius: 12px;
+  white-space: nowrap; flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* ─── SUPPORT ────────────────────────────── */
+#support { background: var(--cream); }
+.support-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.support-card {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: 24px;
+  border-top: 4px solid var(--teal);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.support-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.sc-icon { margin-bottom: 12px; }
+.sc-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.sc-body { font-size: 13px; color: var(--gray1); line-height: 1.7; }
+.sc-points { list-style: none; margin-top: 10px; }
+.sc-points li {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 12px; color: var(--text); line-height: 1.5;
+  padding: 4px 0;
+}
+.sc-points li::before {
+  content: '▸';
+  color: var(--teal);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.stigma-note {
+  background: var(--navy);
+  border-radius: var(--r);
+  padding: 28px 32px;
+  color: rgba(255,255,255,0.85);
+}
+.stigma-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px; color: var(--white);
+  margin-bottom: 12px;
+}
+.stigma-text { font-size: 14px; line-height: 1.8; }
+.stigma-text strong { color: var(--teal); }
+
+/* ─── SOURCES ────────────────────────────── */
+#sources { background: var(--white); }
+.source-list { list-style: none; }
+.source-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray2);
+  font-size: 14px;
+}
+.source-item:last-child { border-bottom: none; }
+.source-num {
+  width: 26px; height: 26px;
+  background: var(--teal-l);
+  color: var(--teal-d);
+  font-size: 12px; font-weight: 700;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.source-body { flex: 1; }
+.source-title { color: var(--navy); font-weight: 500; margin-bottom: 2px; }
+.source-link {
+  color: var(--teal); text-decoration: none; font-size: 12px;
+  word-break: break-all;
+}
+.source-link:hover { text-decoration: underline; }
+
+/* ─── FOOTER ─────────────────────────────── */
+footer {
+  background: var(--navy2);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 28px 24px;
+  font-size: 13px;
+}
+
+/* ─── ALTERNATING BG ─────────────────────── */
+section.bg-white { background: var(--white); }
+section.bg-cream { background: var(--cream); }
+
+@media (max-width: 640px) {
+  section { padding: 52px 0; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .treatment-hero { flex-direction: column; align-items: flex-start; }
+  #sticky-nav { padding: 8px 14px; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ─── NAV ──────────────────────────────── -->
+<nav id="sticky-nav">
+  <div class="nav-brand">てんかん 理解ガイド</div>
+  <ul class="nav-links">
+    <li><a href="#what-is">概念</a></li>
+    <li><a href="#mechanism">脳内</a></li>
+    <li><a href="#seizure-types">発作の種類</a></li>
+    <li><a href="#triggers">誘因</a></li>
+    <li><a href="#treatment">治療</a></li>
+    <li><a href="#emergency">対応</a></li>
+    <li><a href="#comorbidity">関連障害</a></li>
+    <li><a href="#employment">就労</a></li>
+    <li><a href="#support">支援</a></li>
+    <li><a href="#sources">情報源</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ──────────────────────────────── -->
+<section id="hero">
+  <canvas id="neuron-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-badge reveal">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      就労移行支援スタッフのための理解ガイド
+    </div>
+    <h1 class="hero-title reveal reveal-delay-1">
+      日本に<span>100万人</span>いる<br>まだ正しく知られていない病気
+    </h1>
+    <p class="hero-lead reveal reveal-delay-2">
+      てんかんは「けいれん＝てんかん」でも「危険な人＝てんかん」でもない。<br>
+      正確な知識が、利用者さんへのより良い支援に直結します。
+    </p>
+    <div class="hero-stats">
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-num" data-count="100" data-suffix="万人">0万人</div>
+        <div class="stat-label">国内のてんかん患者数<br>（厚生労働科学研究等による推計）</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-num" data-count="70" data-suffix="〜80%">0〜80%</div>
+        <div class="stat-label">薬や外科治療などにより<br>発作をコントロールできる割合<br>（日本てんかん協会）</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-4">
+        <div class="stat-num" data-count="5000" data-suffix="万人">0万人</div>
+        <div class="stat-label">世界のてんかん患者数<br>（WHO推計）</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-5">
+        <div class="stat-num" data-count="2" data-suffix="年">0年</div>
+        <div class="stat-label">発作がなければ<br>運転免許の取得が可能</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-arrow"></div>
+    スクロール
+  </div>
+</section>
+
+<!-- ─── SECTION 1: WHAT IS ─────────────────── -->
+<section id="what-is" class="bg-cream">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        Section 1
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">てんかんとは何か</h2>
+      <p class="section-lead">まず「誤解」から始めます。支援者が抱きやすい誤解と、正確な理解を並べてみます。</p>
+    </div>
+
+    <div class="misconception-pair reveal reveal-delay-1">
+      <div class="mc-card wrong">
+        <div class="mc-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          よくある誤解
+        </div>
+        <div class="mc-text">てんかん＝全身がガタガタ震えるけいれん発作</div>
+      </div>
+      <div class="mc-card right">
+        <div class="mc-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          実際は
+        </div>
+        <div class="mc-text">発作の形は多様。数秒ボーッとする発作や、手が一瞬ぴくっとするだけの発作など、外見上はほとんどわからないものも多い</div>
+      </div>
+    </div>
+
+    <div class="misconception-pair reveal reveal-delay-2">
+      <div class="mc-card wrong">
+        <div class="mc-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          よくある誤解
+        </div>
+        <div class="mc-text">てんかんは治らない・就労も難しい「重大な障害」</div>
+      </div>
+      <div class="mc-card right">
+        <div class="mc-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          実際は
+        </div>
+        <div class="mc-text">約70%は薬で発作がコントロールでき、多くの職業で通常通り働ける。スティグマが最大の障壁になっていることも多い</div>
+      </div>
+    </div>
+
+    <div class="misconception-pair reveal reveal-delay-3">
+      <div class="mc-card wrong">
+        <div class="mc-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          よくある誤解
+        </div>
+        <div class="mc-text">発作中は口に何かを入れて舌を噛まないようにすべき</div>
+      </div>
+      <div class="mc-card right">
+        <div class="mc-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          実際は
+        </div>
+        <div class="mc-text">絶対にしてはいけない。かえって怪我や窒息の原因になる。発作中に舌を完全に噛み切ることはない</div>
+      </div>
+    </div>
+
+    <div class="definition-box reveal reveal-delay-4">
+      <div class="def-word">てんかんの正確な定義</div>
+      <div class="def-text">
+        てんかんとは、脳の神経細胞（ニューロン）が何らかの原因で突然、過剰かつ同期した電気的な活動を起こし、これが繰り返す発作として現れる脳の疾患です（国際抗てんかん連盟 / ILAE 2014年定義）。<br><br>
+        重要なのは「<strong style="color:var(--teal)">繰り返す</strong>」という点です。1回だけの発作はてんかんと診断されません（ただし再発リスクが高い場合は例外）。発作は意識、運動、感覚、自律神経機能のいずれか、またはその組み合わせとして現れます。
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-5">
+      <h3 style="font-size:16px;color:var(--navy);margin-bottom:14px;">日本でのてんかんの広がり</h3>
+      <div class="prevalence-row">
+        <div class="prev-label">全人口比</div>
+        <div class="prev-track"><div class="prev-fill" data-width="1"></div></div>
+        <div class="prev-val">0.6〜1%</div>
+      </div>
+      <div class="prevalence-row">
+        <div class="prev-label">治療管理可</div>
+        <div class="prev-track"><div class="prev-fill" data-width="75"></div></div>
+        <div class="prev-val">70〜80%</div>
+      </div>
+      <div class="prevalence-row">
+        <div class="prev-label">手帳取得者</div>
+        <div class="prev-track"><div class="prev-fill" data-width="30"></div></div>
+        <div class="prev-val">一部</div>
+      </div>
+      <p style="font-size:12px;color:var(--gray1);margin-top:8px;">※有病率は研究によって0.6〜1%程度と幅があります（厚生労働科学研究では「100万人（人口の0.8%）は妥当な推計」とされています）。手帳取得割合は公式な統計データが限られており、おおよその目安として示しています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 2: MECHANISM ──────────────── -->
+<section id="mechanism" class="bg-white">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Section 2
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">脳の中で何が起きているか</h2>
+      <p class="section-lead">てんかんを理解するには、脳が「電気信号」で動いていることを知ることから始まります。</p>
+    </div>
+
+    <div class="brain-diagram reveal reveal-delay-1">
+      <div class="brain-svg-wrap">
+        <!-- Neuron network visualization -->
+        <svg width="480" height="200" viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" id="neuron-svg">
+          <!-- Background grid -->
+          <defs>
+            <radialGradient id="nodeGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00d4c8"/>
+              <stop offset="100%" stop-color="#009e94"/>
+            </radialGradient>
+            <radialGradient id="nodeGradRed" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff7058"/>
+              <stop offset="100%" stop-color="#d94f30"/>
+            </radialGradient>
+          </defs>
+          <!-- Normal state - connections -->
+          <g id="normal-net" opacity="1">
+            <line x1="80" y1="100" x2="160" y2="60" stroke="rgba(0,158,148,0.4)" stroke-width="1.5"/>
+            <line x1="80" y1="100" x2="160" y2="140" stroke="rgba(0,158,148,0.4)" stroke-width="1.5"/>
+            <line x1="160" y1="60" x2="240" y2="100" stroke="rgba(0,158,148,0.4)" stroke-width="1.5"/>
+            <line x1="160" y1="140" x2="240" y2="100" stroke="rgba(0,158,148,0.4)" stroke-width="1.5"/>
+            <line x1="240" y1="100" x2="320" y2="60" stroke="rgba(0,158,148,0.4)" stroke-width="1.5"/>
+            <line x1="240" y1="100" x2="320" y2="140" stroke="rgba(0,158,148,0.4)" stroke-width="1.5"/>
+            <line x1="320" y1="60" x2="400" y2="100" stroke="rgba(0,158,148,0.4)" stroke-width="1.5"/>
+            <line x1="320" y1="140" x2="400" y2="100" stroke="rgba(0,158,148,0.4)" stroke-width="1.5"/>
+            <!-- Nodes -->
+            <circle cx="80" cy="100" r="10" fill="url(#nodeGrad)" opacity="0.8"/>
+            <circle cx="160" cy="60" r="8" fill="url(#nodeGrad)" opacity="0.6"/>
+            <circle cx="160" cy="140" r="8" fill="url(#nodeGrad)" opacity="0.6"/>
+            <circle cx="240" cy="100" r="12" fill="url(#nodeGrad)" opacity="0.9"/>
+            <circle cx="320" cy="60" r="8" fill="url(#nodeGrad)" opacity="0.6"/>
+            <circle cx="320" cy="140" r="8" fill="url(#nodeGrad)" opacity="0.6"/>
+            <circle cx="400" cy="100" r="10" fill="url(#nodeGrad)" opacity="0.8"/>
+          </g>
+          <!-- Labels -->
+          <text x="80" y="125" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="10" font-family="Noto Sans JP">ニューロンA</text>
+          <text x="240" y="125" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="10" font-family="Noto Sans JP">ニューロンB</text>
+          <text x="400" y="125" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="10" font-family="Noto Sans JP">ニューロンC</text>
+          <text x="240" y="20" text-anchor="middle" fill="rgba(0,212,200,0.8)" font-size="12" font-family="Noto Sans JP" font-weight="700">通常時：秩序ある信号伝達</text>
+          <!-- Pulse animations -->
+          <circle cx="80" cy="100" r="10" fill="none" stroke="#00d4c8" stroke-width="2" opacity="0">
+            <animate attributeName="r" values="10;22;10" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="240" cy="100" r="12" fill="none" stroke="#00d4c8" stroke-width="2" opacity="0">
+            <animate attributeName="r" values="12;24;12" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="400" cy="100" r="10" fill="none" stroke="#00d4c8" stroke-width="2" opacity="0">
+            <animate attributeName="r" values="10;22;10" dur="2.5s" begin="1.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" begin="1.6s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+
+      <div class="phase-tabs">
+        <button class="phase-tab active" onclick="switchPhase('normal')">① 通常の脳</button>
+        <button class="phase-tab" onclick="switchPhase('trigger')">② 発作の始まり</button>
+        <button class="phase-tab" onclick="switchPhase('spreading')">③ 放電の広がり</button>
+        <button class="phase-tab" onclick="switchPhase('recovery')">④ 発作後</button>
+      </div>
+
+      <div id="phase-normal" class="phase-content active">
+        <div class="phase-text">
+          脳には約860億個の神経細胞（ニューロン）があり、それぞれが電気信号で情報を伝達しています。ニューロン同士は「シナプス」と呼ばれる接合部を通じてつながり、「今電気を流す（興奮）」か「流さない（抑制）」かを常に調整しています。<br><br>
+          <span class="phase-highlight">健康な脳では、興奮と抑制のバランスが保たれ、必要な信号だけが流れます。</span>
+        </div>
+      </div>
+      <div id="phase-trigger" class="phase-content">
+        <div class="phase-text">
+          何らかの原因（遺伝的要因、脳の構造的異常、睡眠不足・ストレスなどの誘因）によって、脳のある部分でニューロンが突然、過剰に電気信号を出し始めます。<br><br>
+          <span class="phase-highlight">まるで「電気の嵐」が局所的に起きるようなイメージです。</span><br><br>
+          この異常放電が脳の一部にとどまる場合は「焦点発作」、脳全体に一気に広がる場合は「全般発作」になります。
+        </div>
+      </div>
+      <div id="phase-spreading" class="phase-content">
+        <div class="phase-text">
+          異常放電が広がると、その脳の領域が担っている機能に影響が出ます。<br><br>
+          ・運動を担う領域 → 体の動きに影響（けいれん、脱力）<br>
+          ・意識を担う領域 → ボーッとする、応答できなくなる<br>
+          ・感覚を担う領域 → しびれ、光や音の感覚異常<br><br>
+          <span class="phase-highlight">「どこが」「どこまで」放電するかで、発作の見え方が大きく変わります。</span>
+        </div>
+      </div>
+      <div id="phase-recovery" class="phase-content">
+        <div class="phase-text">
+          発作が終わると、ニューロンの活動が過度に抑制された状態（ポスティクタル状態）になります。これにより、<br><br>
+          ・ひどい眠気・疲労感<br>
+          ・頭痛や身体のだるさ<br>
+          ・一時的な記憶の混乱や言語障害<br><br>
+          <span class="phase-highlight">これは発作後の「脳の回復時間」です。責めたり慌てさせたりせず、静かに休める環境を作ることが重要です。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mechanism-steps reveal reveal-delay-2">
+      <div class="mstep">
+        <div class="mstep-num">01</div>
+        <div class="mstep-title">ニューロンが「誤発火」</div>
+        <div class="mstep-text">特定のニューロン群が過剰に同期した電気活動を起こす。原因は構造異常・遺伝・代謝などさまざま</div>
+      </div>
+      <div class="mstep">
+        <div class="mstep-num">02</div>
+        <div class="mstep-title">放電が広がる</div>
+        <div class="mstep-text">電気的興奮が隣接するニューロンへと伝播。局所にとどまるか、全脳に広がるかで発作の種類が変わる</div>
+      </div>
+      <div class="mstep">
+        <div class="mstep-num">03</div>
+        <div class="mstep-title">機能障害として現れる</div>
+        <div class="mstep-text">放電した領域の機能が「暴走」または「停止」し、けいれん・意識消失・感覚異常などとして外に現れる</div>
+      </div>
+      <div class="mstep">
+        <div class="mstep-num">04</div>
+        <div class="mstep-title">自然に停止・回復</div>
+        <div class="mstep-text">多くの発作は1〜3分で自然に終わる。その後は回復期（ポスティクタル状態）が数分〜数時間続く</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 3: SEIZURE TYPES ──────────── -->
+<section id="seizure-types" class="bg-cream">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Section 3
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">発作の多様な顔</h2>
+      <p class="section-lead">「てんかん発作＝全身がガタガタ」は一つの形に過ぎません。見出しをクリックして各発作の特徴を確認してください。</p>
+    </div>
+
+    <div class="type-tree reveal reveal-delay-1">
+      <div class="tree-root">てんかん発作（ILAE 2017年分類）</div>
+      <div class="tree-branches">
+        <!-- Focal -->
+        <div class="tree-branch">
+          <div class="branch-header focal" onclick="toggleBranch(this)">
+            <span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+              焦点発作（脳の一部から始まる）
+            </span>
+            <span class="chevron">▼</span>
+          </div>
+          <div class="branch-body">
+            <div class="seizure-item">
+              <div class="si-name">焦点意識保持発作</div>
+              <div class="si-desc">発作中も意識がある。手足の一部がガクガクする、しびれ・不思議な感覚・自動的な動き（口をモゴモゴするなど）が起きる。本人は発作と気づいていることが多い。</div>
+              <div class="si-look">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                外見：わかりにくいことが多い
+              </div>
+            </div>
+            <div class="seizure-item">
+              <div class="si-name">焦点意識減損発作</div>
+              <div class="si-desc">発作中に意識が薄れる。ボーッとして反応しなくなる、意味のない動作（手をさわる、歩き回るなど）を繰り返す。本人は覚えていないことが多い。</div>
+              <div class="si-look">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                外見：居眠りや「ぼんやり」に見える
+              </div>
+            </div>
+            <div class="seizure-item">
+              <div class="si-name">焦点から両側強直間代発作</div>
+              <div class="si-desc">焦点発作として始まり、その後、放電が両脳半球へ広がってけいれんになる。一般に「大きな発作」として認識されやすい。</div>
+              <div class="si-look">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                外見：全身けいれん
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- General -->
+        <div class="tree-branch">
+          <div class="branch-header general" onclick="toggleBranch(this)">
+            <span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><circle cx="12" cy="12" r="10"/></svg>
+              全般発作（脳全体に関わる）
+            </span>
+            <span class="chevron">▼</span>
+          </div>
+          <div class="branch-body">
+            <div class="seizure-item">
+              <div class="si-name">欠神発作（アブサンス）</div>
+              <div class="si-desc">突然、数秒〜数十秒間ぼーっとして動きが止まる。発作中の記憶はない。終わると何事もなかったように再開する。特に子どもに多い。</div>
+              <div class="si-look">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                外見：ぼーっとして返事をしない
+              </div>
+            </div>
+            <div class="seizure-item">
+              <div class="si-name">強直間代発作</div>
+              <div class="si-desc">最もよく知られた発作。意識消失と同時に全身が硬直（強直期）し、続いてガタガタとけいれん（間代期）が起きる。1〜3分で自然に治まる。</div>
+              <div class="si-look">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                外見：全身けいれん＋意識消失
+              </div>
+            </div>
+            <div class="seizure-item">
+              <div class="si-name">ミオクロニー発作</div>
+              <div class="si-desc">突然、手や肩などが一瞬ぴくっとする。本人は「何かに驚いた」感覚に近いと表現することもある。意識は通常保たれる。</div>
+              <div class="si-look">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                外見：瞬間的なぴくつき
+              </div>
+            </div>
+            <div class="seizure-item">
+              <div class="si-name">脱力発作（アトニー発作）</div>
+              <div class="si-desc">突然、全身または一部の筋肉の力が抜けてその場に崩れ落ちる。転倒による怪我のリスクが高い。</div>
+              <div class="si-look">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                外見：突然の転倒・崩れ落ち
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="important-note reveal reveal-delay-2">
+      <div class="note-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="note-text">
+        <strong>支援者として大切な視点：</strong>発作の「見た目」だけでてんかんかどうかは判断できません。また、てんかんと診断された利用者さんが必ず目に見える発作を起こすとは限りません。「なんとなく集中が途切れる時間が一定周期である」など、本人も気づいていない形で現れていることもあります。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 4: TRIGGERS ───────────────── -->
+<section id="triggers" class="bg-white">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Section 4
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">発作の引き金になるもの</h2>
+      <p class="section-lead">てんかん発作には「誘因（ゆういん）」があることが多いです。誘因は個人差が大きく、すべての人に当てはまるわけではありません。</p>
+    </div>
+
+    <div class="trigger-grid reveal reveal-delay-1">
+      <div class="trigger-card">
+        <div class="tc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="tc-name">睡眠不足</div>
+        <div class="tc-sub">最も代表的な誘因。睡眠のリズムの乱れも影響しうる</div>
+      </div>
+      <div class="trigger-card">
+        <div class="tc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="tc-name">ストレス・疲労</div>
+        <div class="tc-sub">精神的・身体的ストレスが蓄積したとき</div>
+      </div>
+      <div class="trigger-card">
+        <div class="tc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div class="tc-name">服薬の忘れ</div>
+        <div class="tc-sub">抗てんかん薬を飲み忘れると発作リスクが急上昇する</div>
+      </div>
+      <div class="trigger-card">
+        <div class="tc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M12 2a10 10 0 0 1 10 10"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="tc-name">光刺激</div>
+        <div class="tc-sub">点滅する光（光感受性てんかんに該当する場合。てんかん全体のうち一部）</div>
+      </div>
+      <div class="trigger-card">
+        <div class="tc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="tc-name">アルコール</div>
+        <div class="tc-sub">飲酒そのものより、過量摂取や急な断酒が引き金になることも</div>
+      </div>
+      <div class="trigger-card">
+        <div class="tc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="tc-name">月経・ホルモン変動</div>
+        <div class="tc-sub">女性では月経周期に伴って発作が変動することがある（月経てんかん）</div>
+      </div>
+      <div class="trigger-card">
+        <div class="tc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+        </div>
+        <div class="tc-name">特定の薬との相互作用</div>
+        <div class="tc-sub">他疾患の薬との相互作用で発作閾値が下がることがある</div>
+      </div>
+      <div class="trigger-card">
+        <div class="tc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <div class="tc-name">過度な体の疲れ</div>
+        <div class="tc-sub">体力消耗が著しい状態も誘因になりうる</div>
+      </div>
+    </div>
+
+    <div class="trigger-tip reveal reveal-delay-2">
+      <strong>支援のポイント：</strong>誘因は人によって大きく異なります。利用者さん自身が「自分の発作のパターン」を把握できるよう、発作日誌のつけ方や振り返り方を一緒に考えることが、セルフマネジメント支援の一つです。また、職場での「疲れやすい業務」「光刺激の多い環境」などを事前に把握し、合理的配慮の調整材料にすることも重要です。
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 5: TREATMENT ──────────────── -->
+<section id="treatment" class="bg-cream">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        Section 5
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">治療の現状</h2>
+      <p class="section-lead">「治らない病気」というイメージは過去のものです。正確な治療の実態を知ることが、支援の質に影響します。</p>
+    </div>
+
+    <div class="treatment-hero reveal reveal-delay-1">
+      <div class="pie-wrap">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="20"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#009e94" stroke-width="20"
+            stroke-dasharray="220 314" stroke-dashoffset="0"
+            class="pie-animated" data-target="220">
+            <animate attributeName="stroke-dasharray" from="0 314" to="220 314" dur="1.5s" begin="0.5s" fill="freeze"/>
+          </circle>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="20"
+            stroke-dasharray="94 314" stroke-dashoffset="-220"/>
+        </svg>
+        <div class="pie-label">
+          <div class="pie-pct">70〜<br style="line-height:0.5">80%</div>
+          <div class="pie-sub">管理可能</div>
+        </div>
+      </div>
+      <div class="treatment-text-block">
+        <div class="treatment-headline">約70〜80%の患者さんは薬や外科治療などで発作をコントロールできる</div>
+        <div class="treatment-desc">
+          抗てんかん薬（ASM）の適切な使用により、多くの患者さんは発作がほとんど起きない状態を維持できます。薬と外科治療を含めたすべての治療手段により約70〜80%でのコントロールが可能とされています（日本てんかん協会）。残り約20〜30%は薬が十分に効かない「難治性てんかん」に該当しますが、外科治療や新しい治療選択肢が広がっています。<br><br>
+          <strong style="color:var(--teal)">「てんかん＝コントロール不能」は誤解です。</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="treatment-options reveal reveal-delay-2">
+      <div class="tx-card drug">
+        <div class="tx-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#009e94" stroke-width="1.8"><path d="M10.5 20H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v3"/><circle cx="18" cy="18" r="3"/><path d="m22 22-1.5-1.5"/></svg>
+        </div>
+        <div class="tx-name">抗てんかん薬（第一選択）</div>
+        <div class="tx-desc">バルプロ酸、カルバマゼピン、レベチラセタムなど多くの薬剤がある。発作の種類・年齢・副作用を考慮して選択される。継続的な服薬管理が最重要。</div>
+      </div>
+      <div class="tx-card surgery">
+        <div class="tx-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="1.8"><path d="M8 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3"/><path d="M16 5h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/><path d="M12 12H2"/><path d="M22 12h-6"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <div class="tx-name">外科的治療</div>
+        <div class="tx-desc">薬で発作が止まらない場合（難治性てんかん）に検討。異常放電の起点（焦点）を切除する手術や、迷走神経刺激療法（VNS）などが選択肢になる。</div>
+      </div>
+      <div class="tx-card other">
+        <div class="tx-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d94f30" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="tx-name">その他の治療法</div>
+        <div class="tx-desc">ケトジェニック食事療法（特に小児の難治性てんかんに用いる）、定位放射線治療など。病状や年齢に応じて総合的に判断される。</div>
+      </div>
+    </div>
+
+    <div class="important-note reveal reveal-delay-3" style="margin-top:24px">
+      <div class="note-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="note-text">
+        <strong>薬の副作用について：</strong>抗てんかん薬には眠気・集中力低下・気分の変化などの副作用が生じることがあります。就労場面での「集中力の低下」「疲れやすさ」は薬の副作用による場合もあります。本人を責めるより、主治医との相談を促すことが適切です。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 6: EMERGENCY ──────────────── -->
+<section id="emergency" style="background:#fefcfb;padding:72px 0;">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Section 6
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">もし発作が起きたとき</h2>
+      <p class="section-lead">正しい対応を知っていることが、支援者として最も重要な実践知識のひとつです。落ち着いて対応するために、流れを覚えておきましょう。</p>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <div class="emergency-header">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <h3>発作時の対応フロー</h3>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div class="flow-body">
+            <div class="flow-title">慌てない・落ち着く</div>
+            <div class="flow-text">ほとんどの発作は1〜3分で自然に終わります。まず時刻を確認し（発作の持続時間を計測するため）、周囲に危険なものがあれば遠ざけます。</div>
+            <span class="flow-tag do">✓ やること：時刻確認、周囲の安全確保</span>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div class="flow-body">
+            <div class="flow-title">転倒・頭部への衝撃を防ぐ</div>
+            <div class="flow-text">床や地面に倒れそうな場合は支え、頭の下に柔らかいものを置きます。ただし強く押さえつけることはしません。</div>
+            <span class="flow-tag do">✓ やること：頭部保護、クッションを下に敷く</span>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div class="flow-body">
+            <div class="flow-title">横向きに寝かせる</div>
+            <div class="flow-text">嘔吐した場合に誤嚥しないよう、呼吸が安定しているなら横向き（回復体位）にします。体を強制的に動かしてはいけません。</div>
+            <span class="flow-tag do">✓ やること：回復体位への誘導</span>
+            <br>
+            <span class="flow-tag dont">✗ やらないこと：強引に体を押さえる</span>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">4</div>
+          <div class="flow-body">
+            <div class="flow-title">発作中は見守り・記録</div>
+            <div class="flow-text">発作の様子（どの部位から始まったか、持続時間、発作の種類など）をできるだけ記録します。これが医師への重要な情報になります。</div>
+            <span class="flow-tag do">✓ やること：観察・記録（動画も有効）</span>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">5</div>
+          <div class="flow-body">
+            <div class="flow-title">発作後はそっと寄り添う</div>
+            <div class="flow-text">発作後はポスティクタル状態（脳の回復期）になります。眠気・混乱・身体のだるさが出ます。無理に起こしたり話しかけたりせず、静かに回復を待ちます。本人が落ち着いたら「大丈夫ですよ、発作が終わりましたよ」と穏やかに伝えます。</div>
+            <span class="flow-tag do">✓ やること：静かな環境の確保、穏やかな声かけ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dont-list reveal reveal-delay-2">
+      <h4>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+        絶対にしてはいけないこと
+      </h4>
+      <div class="dont-item">
+        <div class="dont-x">✗</div>
+        <div>口の中に指や箸などを入れる ─ 誤嚥や怪我の原因になる。「舌を噛む」ことへの恐れからこの行動を取る人が多いが、発作中に舌が完全に噛み切れることはなく、異物挿入の方が危険</div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-x">✗</div>
+        <div>体を強く押さえつける ─ 骨折や脱臼、筋肉損傷の原因になる。発作を止めようとして抑制しても、脳の放電は止まらない</div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-x">✗</div>
+        <div>水や薬を飲ませようとする ─ 発作中は嚥下機能が低下しており、誤嚥・窒息の危険がある</div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-x">✗</div>
+        <div>人をたくさん集めてしまう・スマートフォンで撮影して公開する ─ プライバシーの侵害。本人にとって大きな精神的負担になる</div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-x">✗</div>
+        <div>発作が終わった直後に「大丈夫？」と繰り返し問いかける ─ ポスティクタル状態では混乱しやすく、過剰な刺激はかえって負担になる</div>
+      </div>
+    </div>
+
+    <div class="call119-box reveal reveal-delay-3">
+      <div class="call119-num">119</div>
+      <div class="call119-body">
+        <div class="call119-title">救急要請が必要な状況</div>
+        <div class="call119-item">
+          <div class="call119-bullet">▸</div>
+          <div>発作が<strong style="color:white">5分以上</strong>続いている（てんかん重積状態の疑い）</div>
+        </div>
+        <div class="call119-item">
+          <div class="call119-bullet">▸</div>
+          <div>発作が<strong style="color:white">繰り返している</strong>（発作と発作の間に意識が戻らない）</div>
+        </div>
+        <div class="call119-item">
+          <div class="call119-bullet">▸</div>
+          <div>発作後も<strong style="color:white">意識がなかなか戻らない</strong>、または呼吸が不規則</div>
+        </div>
+        <div class="call119-item">
+          <div class="call119-bullet">▸</div>
+          <div>発作中に<strong style="color:white">怪我をした</strong>（頭部打撲など）</div>
+        </div>
+        <div class="call119-item">
+          <div class="call119-bullet">▸</div>
+          <div>妊娠中・水中での発作</div>
+        </div>
+        <div class="call119-item">
+          <div class="call119-bullet">▸</div>
+          <div>その利用者さんにとって<strong style="color:white">いつもと様子が違う</strong>発作</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 7: COMORBIDITY ────────────── -->
+<section id="comorbidity" class="bg-cream">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        Section 7
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">他の障害・疾患との関連</h2>
+      <p class="section-lead">てんかんは「単独で存在する」ことは少なく、他の障害や精神疾患を合併しているケースが多くあります。就労移行支援の利用者像を立体的に理解するために不可欠な視点です。</p>
+    </div>
+
+    <!-- 神経発達症 -->
+    <div class="reveal reveal-delay-1">
+      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        神経発達症との関連
+      </h3>
+    </div>
+
+    <div class="mechanism-steps reveal reveal-delay-2" style="margin-bottom:32px;">
+      <div class="mstep" style="border-left-color:#6366f1;">
+        <div class="mstep-num" style="color:#6366f1;">ASD</div>
+        <div class="mstep-title">自閉スペクトラム症</div>
+        <div class="mstep-text">てんかんとの合併率が神経発達症の中で最も高い。研究によって幅があり（概ね5〜30%程度が多く報告されているが、知的障害の合併状況などによって推定値は大きく変わる）、一般人口の約1%と比べて顕著に高い。ASDとてんかんは共通するシナプス・神経接続の発達上の変異を背景として持つと考えられており、単なる「偶然の合併」ではない可能性が研究で示されている。</div>
+      </div>
+      <div class="mstep" style="border-left-color:#8b5cf6;">
+        <div class="mstep-num" style="color:#8b5cf6;">ADHD</div>
+        <div class="mstep-title">注意欠如・多動症</div>
+        <div class="mstep-text">てんかんとADHDの合併は双方向に報告されている。また一部の抗てんかん薬（特にフェノバルビタール等の古い薬剤）が集中力低下・多動を引き起こすことがあり、薬剤性の影響との判別が必要。欠神発作（ボーッとする）がADHDの「不注意」と誤認されるケースもある。</div>
+      </div>
+      <div class="mstep" style="border-left-color:#a78bfa;">
+        <div class="mstep-num" style="color:#a78bfa;">知的障害</div>
+        <div class="mstep-title">知的障害（ID）</div>
+        <div class="mstep-text">知的障害のある人でのてんかん合併率は約20〜30%と報告されており、知的障害が重くなるほど合併率が高まる傾向がある。脳の構造的・神経発達的な要因が両者に共通して影響していると考えられる。</div>
+      </div>
+    </div>
+
+    <!-- 精神疾患との双方向関係 -->
+    <div class="reveal reveal-delay-2">
+      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        精神疾患との双方向的な関係
+      </h3>
+    </div>
+
+    <!-- Bidirectional diagram -->
+    <div class="brain-diagram reveal reveal-delay-3" style="margin-bottom:28px;padding:28px 32px;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:20px;">
+        <div style="background:rgba(255,255,255,0.1);border:1.5px solid rgba(0,158,148,0.4);border-radius:12px;padding:16px 20px;text-align:center;min-width:130px;">
+          <div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700;color:var(--teal);margin-bottom:4px;">てんかん</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);">脳の神経回路の変化</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <svg width="80" height="32" viewBox="0 0 80 32">
+            <defs>
+              <marker id="arr1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#e8a020"/></marker>
+              <marker id="arr2" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8,0 L0,4 L8,8 Z" fill="#e8a020"/></marker>
+            </defs>
+            <line x1="6" y1="10" x2="72" y2="10" stroke="#e8a020" stroke-width="1.5" marker-end="url(#arr1)"/>
+            <line x1="74" y1="22" x2="8" y2="22" stroke="#e8a020" stroke-width="1.5" marker-end="url(#arr2)"/>
+          </svg>
+          <div style="font-size:10px;color:rgba(232,160,32,0.9);font-weight:600;text-align:center;">双方向的な<br>リスク増加</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);border:1.5px solid rgba(232,160,32,0.4);border-radius:12px;padding:16px 20px;text-align:center;min-width:130px;">
+          <div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700;color:#e8c060;margin-bottom:4px;">うつ病・不安障害</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);">セロトニン・GABA系の変化</div>
+        </div>
+      </div>
+      <div style="color:rgba(255,255,255,0.8);font-size:14px;line-height:1.8;">
+        てんかんのある人はうつ病・不安障害を合併しやすく、逆に抑うつや不安のある人はてんかんを発症しやすいという<strong style="color:var(--teal)">双方向の関連</strong>が複数の疫学研究で報告されています。これは単なる「ストレス反応」ではなく、両者に共通する脳内の神経炎症やセロトニン・GABA系の変化が関係していると考えられています。<br><br>
+        就労場面での「意欲の低下」「疲れやすさ」「集中困難」は、てんかん自体・薬の副作用・うつの合併のいずれか、あるいはその組み合わせである可能性があります。原因を単純に一つに帰属させないことが重要です。
+      </div>
+    </div>
+
+    <!-- 身体的原因 -->
+    <div class="reveal reveal-delay-3">
+      <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        後天的な原因によるてんかん
+      </h3>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:32px;" class="reveal reveal-delay-4">
+      <div style="background:var(--white);border-radius:var(--r);padding:18px 20px;border-top:4px solid var(--terra);">
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px;">脳卒中後てんかん</div>
+        <div style="font-size:12px;color:var(--gray1);line-height:1.65;">高齢発症てんかんの主要原因の一つ。脳卒中後に神経細胞の損傷・瘢痕形成が異常放電の起点となる。就労支援では脳卒中の後遺症（麻痺・失語）との複合的な支援が必要になることがある。</div>
+      </div>
+      <div style="background:var(--white);border-radius:var(--r);padding:18px 20px;border-top:4px solid var(--terra);">
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px;">頭部外傷後てんかん</div>
+        <div style="font-size:12px;color:var(--gray1);line-height:1.65;">交通事故・スポーツ外傷などによる脳への直接的な損傷がてんかん発症の誘発因子になる。受傷直後（急性症候性）と数年後の晩期発作（てんかん診断）を区別する必要がある。</div>
+      </div>
+      <div style="background:var(--white);border-radius:var(--r);padding:18px 20px;border-top:4px solid var(--terra);">
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px;">脳腫瘍・感染症後</div>
+        <div style="font-size:12px;color:var(--gray1);line-height:1.65;">脳腫瘍・脳炎・髄膜炎の後にてんかんを発症するケースがある。これらの疾患による認知機能・高次脳機能への影響とてんかん発作が複合することで、就労上の課題が多層化することがある。</div>
+      </div>
+    </div>
+
+    <!-- 支援上の含意 -->
+    <div class="important-note reveal reveal-delay-5">
+      <div class="note-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </div>
+      <div class="note-text">
+        <strong>支援者として意識してほしいこと：「症状の帰属」の難しさ</strong><br><br>
+        ASD＋てんかん、ADHD＋てんかん、うつ＋てんかんという複合的な状態像の利用者さんを支援するとき、「どの症状がどの診断から来ているか」を単純に切り分けることは困難です。<br><br>
+        たとえば「集中力が続かない」ひとつをとっても、ADHDの不注意・欠神発作の見逃し・抗てんかん薬の副作用・うつによる意欲低下・睡眠不足による誘因の重なり——のいずれか、またはその組み合わせである可能性があります。<br><br>
+        <strong>「てんかんだから」あるいは「ASDだから」という単一帰属をせず</strong>、主治医・他の専門家との丁寧な情報連携を基盤とした、個別の状態像の把握が支援の質を決めます。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 8: EMPLOYMENT ─────────────── -->
+<section id="employment" class="bg-white">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Section 8
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">就労における現実</h2>
+      <p class="section-lead">てんかんのある人が就労する際の課題と可能性を、正直に見ておきます。「できない」ではなく「何が課題か」を把握することが支援の出発点です。</p>
+    </div>
+
+    <div class="emp-split reveal reveal-delay-1">
+      <div class="emp-col challenges">
+        <div class="emp-col-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+          就労における課題
+        </div>
+        <div class="emp-item">
+          <div>発作の予測困難性 ─ いつ起きるかわからない不安が本人・職場双方に存在する</div>
+        </div>
+        <div class="emp-item">
+          <div>職業上の制限 ─ 運転業務、高所作業、危険機械操作などは制限される場合がある</div>
+        </div>
+        <div class="emp-item">
+          <div>薬の副作用による影響 ─ 眠気・集中力低下・記憶への影響など、作業能率に影響が出ることがある</div>
+        </div>
+        <div class="emp-item">
+          <div>開示のジレンマ ─ 職場への開示で支援が受けられる反面、偏見・差別のリスクもある</div>
+        </div>
+        <div class="emp-item">
+          <div>スティグマ ─ 社会的偏見による自己効力感の低下、孤立感が就労継続に影響する</div>
+        </div>
+        <div class="emp-item">
+          <div>うつ・不安の合併 ─ てんかんのある人では抑うつや不安症の合併率が高く、複数の系統的レビューで一般人口より有意に高いことが示されており、就労への影響は複合的</div>
+        </div>
+      </div>
+      <div class="emp-col strengths">
+        <div class="emp-col-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          正しく理解された可能性
+        </div>
+        <div class="emp-item">
+          <div>発作がコントロールされていれば、大半の職業で通常通り就労できる</div>
+        </div>
+        <div class="emp-item">
+          <div>発作の種類・頻度・時間帯によっては、職場環境の工夫で多くの問題は解決できる</div>
+        </div>
+        <div class="emp-item">
+          <div>障害者雇用促進法により、合理的配慮の提供が事業主に義務付けられている</div>
+        </div>
+        <div class="emp-item">
+          <div>長年てんかんと共に生きてきた人は、自己管理・体調観察の力が高いことも多い</div>
+        </div>
+        <div class="emp-item">
+          <div>適切な職場環境であれば、発作がほとんどない状態で長く働ける人も多い</div>
+        </div>
+        <div class="emp-item">
+          <div>障害者手帳を取得することで、就労移行支援・定着支援などの公的サービスを利用できる</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="law-card reveal reveal-delay-2">
+      <div class="law-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        法制度・手帳との関係
+      </div>
+      <div class="law-item">
+        <span class="law-badge">精神障害者<br>保健福祉手帳</span>
+        <div>てんかんで精神症状（発作による意識障害・認知機能への影響など）を伴う場合に取得可能。等級は症状の程度に応じて1〜3級。手帳があれば就労移行支援などの障害福祉サービスを利用できる。</div>
+      </div>
+      <div class="law-item">
+        <span class="law-badge">自動車運転</span>
+        <div>道路交通法施行令の運用基準に基づき、「運転に支障をきたすおそれのある発作が2年間ない」場合は医師の診断書のもと免許取得・継続が可能（2002年改正で一律拒否から個別判断に変更）。2014年の改正道路交通法では、虚偽申告への罰則強化・医師の任意届出制度の創設などが追加された。大型・二種免許は原則取得不可。</div>
+      </div>
+      <div class="law-item">
+        <span class="law-badge">合理的配慮</span>
+        <div>障害者雇用促進法に基づき、事業主は合理的配慮の提供が義務。例：業務内容の調整、休憩場所の確保、発作記録の共有ルール作りなど。</div>
+      </div>
+      <div class="law-item">
+        <span class="law-badge">一律制限への<br>注意</span>
+        <div>てんかんであることを理由とした一律の就労拒否・制限は不当とみなされる場合がある。個別の発作状況・業務内容を踏まえた個別判断が求められる。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 8: SUPPORT ─────────────────── -->
+<section id="support" class="bg-cream">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Section 9
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">支援者として何ができるか</h2>
+      <p class="section-lead">てんかんの正確な知識をもとに、就労移行支援の現場でできる具体的な実践を整理します。</p>
+    </div>
+
+    <div class="support-cards reveal reveal-delay-1">
+      <div class="support-card">
+        <div class="sc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#009e94" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="sc-title">アセスメントの充実</div>
+        <div class="sc-body">利用者さんのてんかんの状態を正確に把握することが支援の基礎です。</div>
+        <ul class="sc-points">
+          <li>発作の種類・頻度・持続時間・発作後の状態を確認</li>
+          <li>誘因（睡眠・ストレス・服薬管理）の把握</li>
+          <li>服薬状況と副作用の有無を定期的に確認</li>
+          <li>主治医からの指示（発作時の対応方針）を文書で確認</li>
+        </ul>
+      </div>
+
+      <div class="support-card">
+        <div class="sc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#009e94" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="sc-title">セルフマネジメント支援</div>
+        <div class="sc-body">発作と上手に付き合うための自己管理力を一緒に育てます。</div>
+        <ul class="sc-points">
+          <li>発作日誌のつけ方を共に考える（誘因の発見に役立つ）</li>
+          <li>規則正しい生活リズムの確立を支援</li>
+          <li>服薬管理の方法（アラーム活用など）を一緒に考える</li>
+          <li>発作の「サイン」を本人と確認しておく</li>
+        </ul>
+      </div>
+
+      <div class="support-card">
+        <div class="sc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#009e94" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div class="sc-title">職場との調整</div>
+        <div class="sc-body">職場環境・業務内容の合理的配慮の調整が重要な役割です。</div>
+        <ul class="sc-points">
+          <li>発作リスクのある業務（運転・高所・危険機械）の回避と代替案</li>
+          <li>発作時の職場対応マニュアルの作成支援</li>
+          <li>開示の範囲・タイミングの意思決定支援</li>
+          <li>職場の管理者・担当者への心理教育的な情報提供</li>
+        </ul>
+      </div>
+
+      <div class="support-card">
+        <div class="sc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#009e94" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="sc-title">心理的サポート</div>
+        <div class="sc-body">てんかんに伴うスティグマや精神的影響への配慮が必要です。</div>
+        <ul class="sc-points">
+          <li>発作への恐れ・羞恥心を「病気の特性」として正常化する</li>
+          <li>うつ・不安の合併に注意し、必要に応じて専門機関と連携</li>
+          <li>「病気で弱い人」でなく「てんかんという特性のある人」として関わる</li>
+          <li>就労への自己効力感を高めるための成功体験の積み重ね</li>
+        </ul>
+      </div>
+
+      <div class="support-card">
+        <div class="sc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#009e94" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+        </div>
+        <div class="sc-title">制度・資源の活用</div>
+        <div class="sc-body">使える制度を最大限に活かした支援計画を立てます。</div>
+        <ul class="sc-points">
+          <li>精神障害者保健福祉手帳の取得を支援（未取得の場合）</li>
+          <li>障害者雇用枠での就職先の開拓</li>
+          <li>就労定着支援との連携計画を早期から立てる</li>
+          <li>日本てんかん学会・てんかん友の会などの当事者資源の紹介</li>
+        </ul>
+      </div>
+
+      <div class="support-card">
+        <div class="sc-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#009e94" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="sc-title">緊急対応計画の整備</div>
+        <div class="sc-body">「もし発作が起きたとき」の計画を事前に立てておきます。</div>
+        <ul class="sc-points">
+          <li>本人・家族・主治医と確認した「発作時対応指示書」の作成</li>
+          <li>事業所内スタッフへの発作対応の事前共有</li>
+          <li>発作記録シートの準備と記録の習慣化</li>
+          <li>救急要請の判断基準を事前に本人と確認しておく</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stigma-note reveal reveal-delay-2">
+      <div class="stigma-title">スティグマについて ─ 支援者が知っておくべきこと</div>
+      <div class="stigma-text">
+        てんかんは「古くから誤解されてきた病気」です。古代ギリシャでは「神聖病」と呼ばれ、中世ヨーロッパでは「悪魔憑き」と見なされた歴史があります。日本でも、旧優生保護法（1948〜1996年）のもとでてんかんのある人が強制不妊手術の対象とされていた歴史があり、1996年にようやく廃止されました。<br><br>
+        現代においても、偏見は根強く残っており、<strong>「発作が怖い」「何をするかわからない」</strong>という誤ったイメージが就労の壁になっています。支援者が正確な知識を持ち、職場や社会に対して適切な情報を提供することが、当事者のQOL向上と社会参加促進の重要な柱となります。<br><br>
+        <strong>てんかんのある人を「管理する存在」ではなく、「共に働く存在」として関わることが支援の基本姿勢です。</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 9: SOURCES ─────────────────── -->
+<section id="sources" class="bg-white">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        情報源
+      </div>
+      <div class="divider"></div>
+      <h2 class="section-title">参考情報・一次情報源</h2>
+      <p class="section-lead">さらに深く学ぶための、信頼性の高い情報源をまとめました。</p>
+    </div>
+
+    <ul class="source-list reveal reveal-delay-1">
+      <li class="source-item">
+        <div class="source-num">1</div>
+        <div class="source-body">
+          <div class="source-title">日本てんかん学会（公式サイト）</div>
+          <div class="source-link">・一般向け情報：てんかんとは、発作の種類、治療など</div>
+          <a href="https://www.jea-net.jp/" target="_blank" rel="noopener" class="source-link">https://www.jea-net.jp/</a>
+        </div>
+      </li>
+      <li class="source-item">
+        <div class="source-num">2</div>
+        <div class="source-body">
+          <div class="source-title">WHO（世界保健機関）てんかんファクトシート</div>
+          <div class="source-link">・世界のてんかん有病率・治療ギャップに関する統計</div>
+          <a href="https://www.who.int/news-room/fact-sheets/detail/epilepsy" target="_blank" rel="noopener" class="source-link">https://www.who.int/news-room/fact-sheets/detail/epilepsy</a>
+        </div>
+      </li>
+      <li class="source-item">
+        <div class="source-num">3</div>
+        <div class="source-body">
+          <div class="source-title">国際抗てんかん連盟（ILAE）─ てんかんの定義・発作分類</div>
+          <div class="source-link">・Fisher RS et al. (2017). Operational classification of seizure types by the ILAE. Epilepsia, 58(4), 522–530.</div>
+          <a href="https://doi.org/10.1111/epi.13670" target="_blank" rel="noopener" class="source-link">https://doi.org/10.1111/epi.13670</a>
+        </div>
+      </li>
+      <li class="source-item">
+        <div class="source-num">4</div>
+        <div class="source-body">
+          <div class="source-title">Fisher RS et al. (2014). ILAE Official Report: A practical clinical definition of epilepsy. Epilepsia, 55(4), 475–482.</div>
+          <div class="source-link">・てんかんの定義（2014年改訂版）</div>
+          <a href="https://doi.org/10.1111/epi.12550" target="_blank" rel="noopener" class="source-link">https://doi.org/10.1111/epi.12550</a>
+        </div>
+      </li>
+      <li class="source-item">
+        <div class="source-num">5</div>
+        <div class="source-body">
+          <div class="source-title">てんかん発作時の対応（日本てんかん学会 一般向けガイドライン）</div>
+          <a href="https://www.jea-net.jp/" target="_blank" rel="noopener" class="source-link">https://www.jea-net.jp/</a>
+        </div>
+      </li>
+      <li class="source-item">
+        <div class="source-num">6</div>
+        <div class="source-body">
+          <div class="source-title">厚生労働省：障害者雇用促進法に基づく合理的配慮指針</div>
+          <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/shougaishakoyou/" target="_blank" rel="noopener" class="source-link">https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/shougaishakoyou/</a>
+        </div>
+      </li>
+      <li class="source-item">
+        <div class="source-num">7</div>
+        <div class="source-body">
+          <div class="source-title">道路交通法（てんかんに関する規定）</div>
+          <div class="source-link">・2014年改正により、「2年以上発作がない」等の条件のもとで免許取得・保持が可能</div>
+          <a href="https://www.npa.go.jp/bureau/traffic/insatsu/menkyo.html" target="_blank" rel="noopener" class="source-link">https://www.npa.go.jp/</a>
+        </div>
+      </li>
+      <li class="source-item">
+        <div class="source-num">8</div>
+        <div class="source-body">
+          <div class="source-title">公益社団法人 日本てんかん協会（ほっとライン）</div>
+          <div class="source-link">・当事者・家族向けの相談窓口・情報提供</div>
+          <a href="https://www.jepica.or.jp/" target="_blank" rel="noopener" class="source-link">https://www.jepica.or.jp/</a>
+        </div>
+      </li>
+      <li class="source-item">
+        <div class="source-num">9</div>
+        <div class="source-body">
+          <div class="source-title">Fiest KM et al. (2017). Prevalence and incidence of epilepsy: A systematic review and meta-analysis of international studies. Neurology, 88(3), 296–303.</div>
+          <div class="source-link">・てんかんの有病率・罹患率に関する国際的系統的レビュー（Epub 2016年12月）</div>
+          <a href="https://doi.org/10.1212/WNL.0000000000003509" target="_blank" rel="noopener" class="source-link">https://doi.org/10.1212/WNL.0000000000003509</a>
+        </div>
+      </li>
+    </ul>
+
+    <div style="margin-top:24px;padding:18px 20px;background:var(--amber-l);border-radius:var(--r-s);border:1px solid #f0c060;font-size:13px;color:var(--text);" class="reveal reveal-delay-2">
+      <strong style="color:#92400e;">注記：</strong>本資料は就労移行支援スタッフの理解促進を目的とした教育用資料です。個々の利用者さんの状態の判断・医療的な判断については、必ず主治医・専門家に確認してください。統計数値はいずれも記載の一次情報源に基づきますが、てんかんの疫学は研究によって幅があります。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:6px;font-weight:700;color:rgba(255,255,255,0.7);font-size:14px;">岡村雄一郎</div>
+  <div>就労移行支援スタッフ向け教育資料 ─ キズキビジネスカレッジ</div>
+</footer>
+
+<script>
+// ─── PROGRESS BAR ────────────────────────────
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = pct + '%';
+}, { passive: true });
+
+// ─── INTERSECTION OBSERVER (REVEAL) ──────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Trigger count-up on stat cards
+      const num = entry.target.querySelector('[data-count]');
+      if (num && !num.dataset.done) {
+        num.dataset.done = '1';
+        animateCount(num);
+      }
+      // Trigger prevalence bars
+      entry.target.querySelectorAll('.prev-fill[data-width]').forEach(bar => {
+        if (!bar.dataset.done) {
+          bar.dataset.done = '1';
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
+        }
+      });
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ─── COUNT-UP ANIMATION ───────────────────────
+function animateCount(el) {
+  const target = parseInt(el.dataset.count, 10);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1600;
+  const start = performance.now();
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(eased * target);
+    el.textContent = current.toLocaleString() + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ─── NAV ACTIVE STATE ─────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => navObserver.observe(s));
+
+// ─── PHASE TABS ───────────────────────────────
+function switchPhase(phase) {
+  document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+  const content = document.getElementById('phase-' + phase);
+  if (content) content.classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── ACCORDION BRANCHES ───────────────────────
+function toggleBranch(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.branch-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.branch-header').forEach(h => h.classList.remove('open'));
+  // Open clicked if was closed
+  if (!isOpen) {
+    body.classList.add('open');
+    header.classList.add('open');
+  }
+}
+
+// ─── NEURON CANVAS (HERO) ─────────────────────
+const canvas = document.getElementById('neuron-canvas');
+const ctx = canvas.getContext('2d');
+let nodes = [];
+let animFrame;
+
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((canvas.width * canvas.height) / 18000);
+  for (let i = 0; i < Math.max(count, 20); i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 3 + 2,
+      pulse: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawNeurons(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Update
+  nodes.forEach(n => {
+    n.x += n.vx;
+    n.y += n.vy;
+    n.pulse += 0.02;
+    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+  });
+  // Draw connections
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = `rgba(0,158,148,${0.3 * (1 - dist/120)})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    }
+  }
+  // Draw nodes
+  nodes.forEach(n => {
+    const pulse = Math.sin(n.pulse) * 0.5 + 0.5;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r + pulse, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(0,212,200,${0.4 + pulse * 0.4})`;
+    ctx.fill();
+  });
+  animFrame = requestAnimationFrame(drawNeurons);
+}
+
+resizeCanvas();
+initNodes();
+drawNeurons();
+window.addEventListener('resize', () => {
+  resizeCanvas();
+  initNodes();
+});
+
+// ─── SCROLL SMOOTH FOR ANCHOR ─────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      const offset = 60; // nav height
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
